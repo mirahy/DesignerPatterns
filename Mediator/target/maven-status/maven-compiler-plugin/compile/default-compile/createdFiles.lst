@@ -1,0 +1,8 @@
+br/edu/ifms/mediator/Mediator.class
+br/edu/ifms/mediator/MediatorExample.class
+br/edu/ifms/mediator/ButtonSearch.class
+br/edu/ifms/mediator/ButtonView.class
+br/edu/ifms/mediator/Command.class
+br/edu/ifms/mediator/MediatorExample$1.class
+br/edu/ifms/mediator/ButtonBook.class
+br/edu/ifms/mediator/LabelDisplay.class

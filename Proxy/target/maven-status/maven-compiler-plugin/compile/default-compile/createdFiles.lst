@@ -1,0 +1,5 @@
+br/edu/ifms/proxy/PessoaImpl.class
+br/edu/ifms/proxy/ProxyPessoa.class
+br/edu/ifms/proxy/Pessoa.class
+br/edu/ifms/proxy/ProxyExample.class
+br/edu/ifms/proxy/PessoaDAO.class

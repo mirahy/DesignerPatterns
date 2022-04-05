@@ -1,0 +1,4 @@
+br/edu/ifms/composite/Machine.class
+br/edu/ifms/composite/TestMachine.class
+br/edu/ifms/composite/MachineComponent.class
+br/edu/ifms/composite/MachineComposite.class
