@@ -18,10 +18,9 @@ public class Pedido {
         return null;       
     }
     
-    public BigDecimal getValor(){
+    public Double getValor(){
         
-        return null;
-        
+        return 0.0;     
     }
     
 }

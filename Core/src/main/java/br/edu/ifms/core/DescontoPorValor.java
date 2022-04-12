@@ -15,9 +15,9 @@ public class DescontoPorValor implements Desconto{
     private Desconto proximo;
 
     @Override
-    public BigDecimal calcular(Pedido pedido) {
+    public Double calcular(Pedido pedido) {
         if(pedido.getValor() > 1000){
-            return pedido.getValor().multiply(BigDecimal.valueOf(0.10));
+            return pedido.getValor()*Double.valueOf(0.10);
         }else{
             return proximo.calcular(pedido);
         }

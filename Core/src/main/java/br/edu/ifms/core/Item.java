@@ -14,7 +14,7 @@ public class Item {
     
     private int numero;
     
-    private BigDecimal valor;
+    private Double valor;
     
     
 }

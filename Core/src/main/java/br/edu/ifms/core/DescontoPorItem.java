@@ -15,9 +15,9 @@ public class DescontoPorItem implements Desconto{
     private Desconto proximo;
 
     @Override
-    public BigDecimal calcular(Pedido pedido) {
+    public Double calcular(Pedido pedido) {
         if(pedido.getItens().size() > 10){
-            return pedido.getValor().multiply(BigDecimal.valueOf(0.5));
+            return pedido.getValor()*Double.valueOf(0.05);
         }else{
             return proximo.calcular(pedido);
         }

@@ -13,8 +13,8 @@ import java.math.BigDecimal;
 public class SemDesconto implements Desconto{
 
     @Override
-    public BigDecimal calcular(Pedido pedido) {
-        return BigDecimal.ZERO;
+    public Double calcular(Pedido pedido) {
+        return 0.0;
     }
 
     @Override

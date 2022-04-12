@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  * @author aluno
  */
 public interface Desconto {
-    BigDecimal calcular(Pedido pedido);
+    Double calcular(Pedido pedido);
     void setProximo(Desconto proximo);
     
 }
