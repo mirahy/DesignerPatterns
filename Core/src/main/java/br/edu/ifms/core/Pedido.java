@@ -7,10 +7,6 @@ package br.edu.ifms.core;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- *
- * @author aluno
- */
 public class Pedido {
     
     public List<Item> getItens(){

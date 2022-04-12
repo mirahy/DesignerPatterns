@@ -10,8 +10,13 @@ package br.edu.ifms.core;
  * @author Talita Fonseca
  */
 public class CalculadorDeDesconto {
+    
+    public static void main(String[] args) {
+            final Pedido pedido = new Pedido();
+            calculaDesconto(pedido);
+    }
      
-    public Double calculaDesconto(Pedido pedido){
+    public static  Double calculaDesconto(Pedido pedido){
         final Desconto descontoPorItem = new DescontoPorItem();
         final Desconto descontoPorValor = new DescontoPorValor();
         final Desconto semDesconto = new SemDesconto();
@@ -20,11 +25,6 @@ public class CalculadorDeDesconto {
         descontoPorValor.setProximo(semDesconto);
         
         return descontoPorItem.calcular(pedido);
-    }
-    
-    public static void main(String[] args) {
-            final Pedido pedido = new Pedido();
-            
     }
     
 }
