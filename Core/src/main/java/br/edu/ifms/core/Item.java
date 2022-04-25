@@ -4,8 +4,6 @@
  */
 package br.edu.ifms.core;
 
-import java.math.BigDecimal;
-
 /**
  *
  * @author aluno
@@ -14,7 +12,7 @@ public class Item {
     
     private int numero;
     
-    private BigDecimal valor;
+    private Double valor;
     
     
 }

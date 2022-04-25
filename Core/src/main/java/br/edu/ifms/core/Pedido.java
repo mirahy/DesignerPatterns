@@ -4,7 +4,6 @@
  */
 package br.edu.ifms.core;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -18,7 +17,7 @@ public class Pedido {
         return null;       
     }
     
-    public BigDecimal getValor(){
+    public Double getValor(){
         
         return null;
         

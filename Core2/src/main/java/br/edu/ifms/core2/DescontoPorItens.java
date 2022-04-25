@@ -2,24 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.edu.ifms.core;
+package br.edu.ifms.core2;
+
+import java.math.BigDecimal;
 
 /**
  *
- * @author aluno
+ * @author santos
  */
-public class DescontoPorValor implements Desconto{
+public class DescontoPorItens implements Desconto {
     
     private Desconto proximo;
 
     @Override
-    public Double calcular(Pedido pedido) {
-        if(pedido.getValor() > 1000){
-            return pedido.getValor() * 0.10;
-        }else{
+    public BigDecimal calcular(Pedido pedido) {
+        if (pedido.getItens().size() > 10) {
+            return pedido.getValor().multiply(BigDecimal.valueOf(0.05));
+        } else {
             return proximo.calcular(pedido);
         }
-        
     }
 
     @Override
