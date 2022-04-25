@@ -6,10 +6,6 @@ package br.edu.ifms.core;
 
 import java.util.List;
 
-/**
- *
- * @author aluno
- */
 public class Pedido {
     
     public List<Item> getItens(){
@@ -19,8 +15,7 @@ public class Pedido {
     
     public Double getValor(){
         
-        return null;
-        
+        return 0.0;     
     }
     
 }

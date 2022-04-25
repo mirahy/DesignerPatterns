@@ -20,7 +20,7 @@ public class CalculadorDeDesconto {
 
     public static BigDecimal calculaDesconto(Pedido pedido) {
         if (pedido.getItens().size() > 10) {
-            return pedido.getValor().multiply(BigDecimal.valueOf(0.5));
+            return pedido.getValor().multiply(BigDecimal.valueOf(0.05));
         } else if (pedido.getValor().compareTo(BigDecimal.valueOf(1000.0)) > 0) {
             return pedido.getValor().multiply(BigDecimal.valueOf(0.10));
         } else {

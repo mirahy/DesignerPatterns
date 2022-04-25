@@ -16,6 +16,7 @@ public class DescontoPorValor implements Desconto{
     public Double calcular(Pedido pedido) {
         if(pedido.getValor() > 1000){
             return pedido.getValor() * 0.10;
+
         }else{
             return proximo.calcular(pedido);
         }

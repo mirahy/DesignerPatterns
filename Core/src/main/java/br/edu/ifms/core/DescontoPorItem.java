@@ -16,6 +16,7 @@ public class DescontoPorItem implements Desconto{
     public Double calcular(Pedido pedido) {
         if(pedido.getItens().size() > 10){
             return pedido.getValor() * 0.5;
+
         }else{
             return proximo.calcular(pedido);
         }
