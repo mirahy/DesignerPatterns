@@ -5,7 +5,10 @@
 package br.edu.ifms.agenda.view;
 
 import br.edu.ifms.agenda.dao.ContatoDao;
+import br.edu.ifms.agenda.facade.ContatoFacade;
 import br.edu.ifms.agenda.model.Contato;
+import java.awt.Frame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,17 +17,18 @@ import br.edu.ifms.agenda.model.Contato;
 public class Agenda extends javax.swing.JFrame {
 
     ContatoDao dao;
-       
-    public Agenda() {
+    private ContatoFacade facade;
+    Frame parent;
+
+    public Agenda(java.awt.Frame parent, boolean modal, ContatoFacade facade) {
+        dao = new ContatoDao();
+        this.facade = facade;
+        this.parent = parent;
         initComponents();
     }
-
-    Agenda(Contato contato) {
-        initComponents();
-        txtId.setText(String.valueOf(contato.getId()));
-        txtNome.setText(contato.getNome());
-        txtEmail.setText(contato.getEmail());
-        txtTelefone.setText(contato.getTelefone());
+   
+   public void setId(Long id) {
+        facade.carregarDados(id, txtId, txtNome, txtTelefone, txtEmail);
     }
 
     /**
@@ -48,7 +52,6 @@ public class Agenda extends javax.swing.JFrame {
         txtTelefone = new javax.swing.JTextField();
         txtId = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jButtonEditar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jButtonFechar = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
@@ -147,11 +150,13 @@ public class Agenda extends javax.swing.JFrame {
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
-        jButtonEditar.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        jButtonEditar.setText("Editar");
-
         jButtonExcluir.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
         jButtonFechar.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         jButtonFechar.setText("Fechar");
@@ -174,30 +179,23 @@ public class Agenda extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jButtonSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(25, 25, 25)
-                .addComponent(jButtonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                .addGap(30, 30, 30)
-                .addComponent(jButtonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonFechar, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                .addGap(94, 94, 94))
+                .addGap(136, 136, 136)
+                .addComponent(jButtonSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonFechar, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addGap(121, 121, 121))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonFechar)
-                    .addComponent(jButtonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonSalvar, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButtonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(37, 37, 37))
+                    .addComponent(jButtonSalvar)
+                    .addComponent(jButtonExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonFechar))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -239,51 +237,32 @@ public class Agenda extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        Contato c = new Contato();
-        c.setNome(txtNome.getText());
-        c.setEmail(txtEmail.getText());
-        c.setTelefone(txtTelefone.getText());
-        dao = new ContatoDao();
-        dao.inserir(c);
+         if (JOptionPane.showConfirmDialog(Agenda.this, "Deseja salvar esses dados?",
+                "Salvar", JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            facade.salvar(txtId, txtNome, txtTelefone, txtEmail);
+            JOptionPane.showMessageDialog(this, "Dados salvos com sucesso!",
+                    "Informação", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Agenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Agenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Agenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Agenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        
+        if (JOptionPane.showConfirmDialog(this, "Deseja excluir esses dados?",
+                "Excluir", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            Long id = Long.parseLong(txtId.getText());
+            dao.excluir(id);
+            JOptionPane.showMessageDialog(this, "Dados excluidos com sucesso!",
+                    "Informação", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
         }
-        //</editor-fold>
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Agenda().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonFechar;
     private javax.swing.JButton jButtonSalvar;

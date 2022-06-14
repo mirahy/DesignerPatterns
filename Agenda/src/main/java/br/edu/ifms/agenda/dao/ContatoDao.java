@@ -30,7 +30,7 @@ public class ContatoDao {
         List<Contato> clientes = null;
         Boolean hasNome = nome != null && !nome.isBlank() && !nome.isEmpty();
         if (hasNome) {
-            condicao = " WHERE c.nome LIKE ?1 ";
+            condicao = " WHERE c.nome LIKE ?1 or c.telefone LIKE ?1 or c.email LIKE ?1 ";
         }
         Query query = em.createQuery(JPQL + condicao);
         if (hasNome) {
