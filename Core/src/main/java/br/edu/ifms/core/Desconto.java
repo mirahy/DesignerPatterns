@@ -4,8 +4,6 @@
  */
 package br.edu.ifms.core;
 
-import java.math.BigDecimal;
-
 /**
  *
  * @author aluno

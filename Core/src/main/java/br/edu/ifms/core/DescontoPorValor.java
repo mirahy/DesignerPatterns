@@ -4,8 +4,6 @@
  */
 package br.edu.ifms.core;
 
-import java.math.BigDecimal;
-
 /**
  *
  * @author aluno
@@ -17,7 +15,8 @@ public class DescontoPorValor implements Desconto{
     @Override
     public Double calcular(Pedido pedido) {
         if(pedido.getValor() > 1000){
-            return pedido.getValor()*Double.valueOf(0.10);
+            return pedido.getValor() * 0.10;
+
         }else{
             return proximo.calcular(pedido);
         }
